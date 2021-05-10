@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script>
+        //se hace la solicitud o request
+        //fetch(my request)
+        //fetch es para obtener un solicitud simple en el archivo html
+        fetch("https://pokeapi.co/api/v2/pokemon")
+            .then(response => {return response.json()})
+            .then(response => {console.log(response);})
+            .catch(err => {console.log(err)})
+    </script>
+</body>
+</html>
