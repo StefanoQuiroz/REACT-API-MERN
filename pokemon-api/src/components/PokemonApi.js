@@ -67,5 +67,5 @@ export default PokemonApi;
 
 //Comentarios
 /*
-Como comprar un input con el name === al pokemon.name  me devuelva si existe o no existe
+Como comparar un input con el name === al pokemon.name  me devuelva si existe o no existe
  */
