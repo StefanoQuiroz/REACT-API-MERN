@@ -1,71 +1,47 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
+//URL
 //https://pokeapi.co/api/v2/pokemon
 //https://pokeapi.co/api/v2/pokemon/?limit=807
 
-    const StyledButton = styled.button`
-        display:flex;
-        align-items: center;
-        justify-content: center;
-        width: 12rem;
-        heigth: 1rem;
-        margin: 2rem auto;
+const StyledButton = styled.button`
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: 12rem;
+    height: 1.7rem;
+    margin: 2rem auto;
+    background-color: #505050;
+    color:white;
+    border-radius: 7px;
+    border-color: none;
+`;
 
-    `;
+const StyledDiv = styled.div`
+    text-align: left;
+    grid: flex;
+    justify-content: center;
+    algn-items: center;
+    margin: auto;
+    width: 8rem;
+`;
 
-    const StyledDiv = styled.div`
-        text-align: left;
-        grid: flex;
-        justify-content: center;
-        algn-items: center;
-        margin: auto;
-        width: 8rem;
-
-    `;
-
-    const PokemonApi = () => {
-        const [state, setState] = useState({
-            people: ""
-        });
-
+const PokemonApi = (props) => {
+    const [state, setState] = useState([]);
     
-    
-    const onChangeClick = (e) => {
-        e.preventDefault();
+    const onClickHandle = () => {
         fetch("https://pokeapi.co/api/v2/pokemon/?limit=807")
             .then(response => response.json())
-            .then(response => setState({
-                pokemons: response.results
-            }))
+            .then(response => setState(response.results));
     }
 
-    /* const find = () =>{ 
-        state.pokemons.forEach( p=> {
-        let pokemonInput = state.pokemonNombre.toLowerCase()
-        if(pokemonInput === p.name){
-            return ("Existe "+ pokemonInput);
-        } else {
-            return ("No existe "+ pokemonInput);
-        }
-    }); */
-
-
-    const items = state.pokemons ? state.pokemons.map((pokemon, index) => (<StyledDiv key={index}>{pokemon.name}</StyledDiv>)) : null;
-
+    const items = state.length>0 && state.map((pokemon, index) => (<StyledDiv key={index}>{pokemon.name}</StyledDiv>));
     return (
         <div>
-           {/*  <label>Buscar el pokemon: </label>
-            <input type="text" name="pokemonNombre" placeholder="Buscar el pokemon"/>
-            <h5>{find()}</h5> */}
-            <StyledButton type="button" onClick={onChangeClick}>Fetch Pokemons</StyledButton>
+            <StyledButton onClick={onClickHandle}>Fetch Pokemons</StyledButton>
             <div>{items}</div>
         </div>
     );
 }
 
 export default PokemonApi;
-
-//Comentarios
-/*
-Como comparar un input con el name === al pokemon.name  me devuelva si existe o no existe
- */
