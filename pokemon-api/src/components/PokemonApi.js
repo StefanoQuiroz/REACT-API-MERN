@@ -25,12 +25,12 @@ import styled from 'styled-components';
 
     const PokemonApi = () => {
         const [state, setState] = useState({
-            pokemons: ""
+            people: ""
         });
 
     
     
-    const onClickHandle = (e) => {
+    const onChangeClick = (e) => {
         e.preventDefault();
         fetch("https://pokeapi.co/api/v2/pokemon/?limit=807")
             .then(response => response.json())
@@ -39,12 +39,25 @@ import styled from 'styled-components';
             }))
     }
 
-    
+    /* const find = () =>{ 
+        state.pokemons.forEach( p=> {
+        let pokemonInput = state.pokemonNombre.toLowerCase()
+        if(pokemonInput === p.name){
+            return ("Existe "+ pokemonInput);
+        } else {
+            return ("No existe "+ pokemonInput);
+        }
+    }); */
+
+
     const items = state.pokemons ? state.pokemons.map((pokemon, index) => (<StyledDiv key={index}>{pokemon.name}</StyledDiv>)) : null;
 
     return (
         <div>
-            <StyledButton type="button" onClick={onClickHandle}>Fetch Pokemons</StyledButton>
+           {/*  <label>Buscar el pokemon: </label>
+            <input type="text" name="pokemonNombre" placeholder="Buscar el pokemon"/>
+            <h5>{find()}</h5> */}
+            <StyledButton type="button" onClick={onChangeClick}>Fetch Pokemons</StyledButton>
             <div>{items}</div>
         </div>
     );
