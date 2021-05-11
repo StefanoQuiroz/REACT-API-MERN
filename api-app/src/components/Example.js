@@ -1,18 +1,19 @@
+//Mostrar una lista de pokemons en la base de datos
 import React, {useState, useEffect} from 'react';
-//Mostrar una lista de personas en la base de datos.
-const Example = (props) => {
-    const [people, setPeople] = useState([]);
+
+const Example = () => {
+    const [pokemons, setPokemons] = useState([]);
+    //Hacer llamada a la API con useEffect con ayuda de 
     useEffect(() => {
         fetch('https://pokeapi.co/api/v2/pokemon')
             .then(response => response.json())
-            .then(response => setPeople(response.results))
-    }, []);
-
+            .then(response => setPokemons(response.results))
+    }, [])
     return (
         <div>
-            {people.length > 0 && people.map((person, index) => {
-                return <div key={index}>{person.name}</div>
-            })}
+            {pokemons.length > 0 && pokemons.map((pokemon, index) => (
+                <div key={index}>{pokemon.name}</div>
+            ))}            
         </div>
     );
 }
