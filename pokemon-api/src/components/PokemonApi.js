@@ -64,3 +64,8 @@ import styled from 'styled-components';
 }
 
 export default PokemonApi;
+
+//Comentarios
+/*
+Como comprar un input con el name === al pokemon.name  me devuelva si existe o no existe
+ */
