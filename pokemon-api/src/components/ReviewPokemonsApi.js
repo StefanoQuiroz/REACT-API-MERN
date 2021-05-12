@@ -44,10 +44,10 @@ const ReviewPokemonsApi = () => {
     const findPokemon = state.length > 0 && state.map((pokemons)=> ((pokemonName === pokemons.name) ? true : false))
     
     const finder = () => {
-        if(findPokemon){
-            return "Existe";
-        } else{
-            return "No existe";
+        if(findPokemon.length && findPokemon.includes(true)){
+            return "existe";
+        } else {
+            return "No existe"
         }
     }
     const items = state.length > 0 && state.map((pokemons, index) => (<StyledDiv key={index}>{pokemons.name}</StyledDiv>));
