@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 //URL
 //https://pokeapi.co/api/v2/pokemon
@@ -28,8 +28,10 @@ const StyledDiv = styled.div`
 
 const PokemonApi = (props) => {
     const [state, setState] = useState([]);
+    const [userPokemon, setUserPokemon ] = useState("");
+    
     //Method onChange
-    const onChangeClick = (event) => {
+    /* const onChangeClick = (event) => {
         const name = event.target.name;
         const value = event.target.value;
         setState({
@@ -37,11 +39,16 @@ const PokemonApi = (props) => {
             [name]:value,
         })
         
-    }
+    } */
 
     //Method onClick
-    const onClickHandle = (e) => {
-        e.preventDefault();
+
+    useEffect(()=>{
+        onClickHandle()
+    },[])
+
+    const onClickHandle = () => {
+        //e.preventDefault();
         fetch("https://pokeapi.co/api/v2/pokemon/?limit=807")
             .then(response => response.json())
             .then(response => setState(response.results));
@@ -53,18 +60,18 @@ const PokemonApi = (props) => {
         }
     } */
     //list-items
+    //boolState ? setBoolState(false) : setBoolState(true)
+    const findPokemon= state.length> 0 && state.map((p, index)=>  ((p.name === userPokemon) ? "Existe": ""));
+
     const items = state.length>0 && state.map((pokemon, index) => (<StyledDiv key={index}>{pokemon.name}</StyledDiv>));
     return (
         <div>
+            {console.log(state)}
             <div>
                 <label htmlFor="pokemonName">Buscar Pokemon: </label>
-                <input type="text" name="pokemonName" placeholder="Ingrese Pokemon" onChange={onChangeClick}/>
-                {/* {
-                    state.map(p=>{ (p.name === state.name) ?
-                        <h3>Existe</h3> : 
-                        <h3>No existe</h3>
-                    })
-                } */}
+                <input type="text" name="pokemonName" placeholder="Ingrese Pokemon" onChange={e=>setUserPokemon(e.target.value)}/* onChange={onChangeClick} *//>
+                <h3>{(findPokemon.length > 0 && findPokemon.includes("Existe")) ? "existe" : "No existe" }</h3>
+                
             </div>
             <StyledButton onClick={onClickHandle} value={state}>Fetch Pokemons</StyledButton>
             <div>{items}</div>
@@ -75,4 +82,4 @@ const PokemonApi = (props) => {
 export default PokemonApi;
 
 //onClick cuando aparezca y desaparezca
-//cuando recibo un input y quiero comprarlo con el item,name de pokemon
+//cuando recibo un input y quiero comprarlo con el item.name de pokemon
