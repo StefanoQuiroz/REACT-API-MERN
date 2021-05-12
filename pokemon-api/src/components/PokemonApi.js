@@ -27,22 +27,11 @@ const StyledDiv = styled.div`
 `;
 
 const PokemonApi = (props) => {
+    //state para el ussEffect
     const [state, setState] = useState([]);
+    //state para el input
     const [userPokemon, setUserPokemon ] = useState("");
     
-    //Method onChange
-    /* const onChangeClick = (event) => {
-        const name = event.target.name;
-        const value = event.target.value;
-        setState({
-            ...state,
-            [name]:value,
-        })
-        
-    } */
-
-    //Method onClick
-
     useEffect(()=>{
         onClickHandle()
     },[])
