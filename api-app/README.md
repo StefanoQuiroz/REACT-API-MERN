@@ -1,1 +1,4 @@
-# Aprendiendo el hook useEffect 
+# Aprendiendo:  
+- useEffect hook
+- fectch
+- Axios
