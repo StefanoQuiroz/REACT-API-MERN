@@ -26,21 +26,26 @@ const StyledDiv = styled.div`
 
 const AxiosPokemon = (props) => {
     const [state, setState] = useState([])
-    //const [pokeBall, setPokeBall] = useState("");
+    const [pokeBall, setPokeBall] = useState("");
     
     const onClickHandle = (e)=>{
-        //e.preventDefault();
+        e.preventDefault();
         axios.get("https://pokeapi.co/api/v2/pokemon/?limit=807")
             .then(response => setState(response.data.results));
     }
 
-    const items = state.length > 0 && state.map((pokemon, index) => (<StyledDiv key={index}>{pokemon.name}</StyledDiv>))
-   ;
+    const arrayPokemon = state.length > 0 && state.map((pokemon=> ((pokeBall === pokemon.name) ? true : false)));
+
+    const findPokemon = () => {
+        return (arrayPokemon.length > 0 && arrayPokemon.includes(true)) ? "Existe" : "No existe";
+    }
+    const items = state.length > 0 && state.map((pokemon, index) => (<StyledDiv key={index}>{pokemon.name}</StyledDiv>));
     return (
         <div>
             <div>
                 <label htmlFor="pokemonName">Buscar Pokemon: </label>
-                <input type="text" name="pokemonName" />
+                <input type="text" name="pokemonName" value={pokeBall} onChange={(e)=>setPokeBall(e.target.value)}/>
+                <h4>{findPokemon()}</h4>
             </div>
             <StyledButton onClick={onClickHandle}>Fetch Pokemons</StyledButton>
             <div>{items}</div>
@@ -49,3 +54,5 @@ const AxiosPokemon = (props) => {
 }
 
 export default AxiosPokemon;
+
+//en JSX onClick, onChange recordar!!!
