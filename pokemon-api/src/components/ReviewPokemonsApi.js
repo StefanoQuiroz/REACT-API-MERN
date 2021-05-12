@@ -44,7 +44,7 @@ const ReviewPokemonsApi = () => {
     const findPokemon = state.length > 0 && state.map((pokemons)=> ((pokemonName === pokemons.name) ? true : false))
     
     const finder = () => {
-        if(findPokemon.length && findPokemon.includes(true)){
+        if(findPokemon.length > 0 && findPokemon.includes(true)){
             return "existe";
         } else {
             return "No existe"
